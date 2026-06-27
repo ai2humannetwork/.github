@@ -1,167 +1,127 @@
-# AI2Human Network
+<p align="center">
+  <img src="./assets/ai2human-network-banner.svg" alt="AI2Human Network architecture banner" width="100%" />
+</p>
 
-**The execution and verification layer for the agent economy.**
+<p align="center">
+  <a href="https://ai2human.work"><img alt="Website" src="https://img.shields.io/badge/website-ai2human.work-67E8F9?style=for-the-badge&labelColor=05070F"></a>
+  <a href="https://x.com/ai2humannetwork"><img alt="X" src="https://img.shields.io/badge/X-@ai2humannetwork-8B7CFF?style=for-the-badge&labelColor=05070F"></a>
+  <img alt="Base" src="https://img.shields.io/badge/Base-USDC%20settlement-FFB56B?style=for-the-badge&labelColor=05070F">
+  <img alt="B20" src="https://img.shields.io/badge/B20-proof%20gateway-22C55E?style=for-the-badge&labelColor=05070F">
+</p>
 
-AI agents can plan, write, trade, browse, and call APIs. But many workflows still stop at the same boundary: someone has to verify a real account, review evidence, check eligibility, complete an external action, or provide proof that a task actually happened.
+<h3 align="center">Agent requests. Human proof. Verified settlement.</h3>
 
-AI2Human turns those human-needed steps into a network primitive.
+<p align="center">
+AI2Human Network turns human-needed steps into callable infrastructure for agents, protocols, token issuers, and onchain applications.
+</p>
+
+---
+
+## What Breaks
+
+Agents are getting better at planning, browsing, coding, trading, and calling APIs.
+
+But many workflows still fail at the boundary where software needs a verified human step:
+
+- account-bound actions
+- document or entity review
+- eligibility checks
+- local or off-platform evidence
+- campaign participation verification
+- token access decisions
+- dispute and proof review
+- settlement after accepted work
+
+AI2Human makes that boundary programmable.
 
 ```text
 agent request -> human execution / verification -> structured proof -> verify -> settle
 ```
 
-Every request should become a traceable workflow:
+## The Network Stack
 
-- a machine-readable task
-- an eligible human operator or verifier
-- a structured proof bundle
-- a verification result
-- a settlement event
-- a reputation signal
-
-## Network Map
-
-```text
-┌────────────────────┐
-│ Agents / Projects  │
-└─────────┬──────────┘
-          │ request
-          v
-┌────────────────────┐
-│ AI2Human Skills    │  skill.md · manifests · templates · paid API paths
-└─────────┬──────────┘
-          │ normalized request
-          v
-┌────────────────────┐
-│ Protocol Layer     │  request schema · proof schema · verification states
-└─────────┬──────────┘
-          │ routed work
-          v
-┌────────────────────┐
-│ Human Network      │  operators · reviewers · compliance checks
-└─────────┬──────────┘
-          │ evidence
-          v
-┌────────────────────┐
-│ Proof Kit          │  proof bundles · hashes · reviewer outputs
-└─────────┬──────────┘
-          │ accepted proof
-          v
-┌────────────────────┐
-│ Settlement Layer   │  USDC prize pools · escrow · claims · refunds
-└─────────┬──────────┘
-          │ outcome
-          v
-┌────────────────────┐
-│ Reputation Graph   │  operators · reviewers · agents · projects
-└────────────────────┘
-```
-
-## Core Repositories
-
-| Repository | Layer | What It Contains |
+| Layer | Public Module | What It Does |
 | --- | --- | --- |
-| [`ai2human-protocol`](https://github.com/ai2humannetwork/ai2human-protocol) | Protocol | Request manifests, proof bundle specs, verification results, settlement events, and lifecycle state machines. |
-| [`ai2human-skills`](https://github.com/ai2humannetwork/ai2human-skills) | Agent Access | Agent-readable skills, manifests, task templates, B20 skill docs, and OpenClaw-compatible test paths. |
-| [`ai2human-proof-kit`](https://github.com/ai2humannetwork/ai2human-proof-kit) | Proof | JSON schemas, sample proof bundles, verification result examples, and lightweight validation utilities. |
-| [`ai2human-settlement-contracts`](https://github.com/ai2humannetwork/ai2human-settlement-contracts) | Settlement | Base USDC prize pools, verified reward settlement, contract references, and payout proof docs. |
-| [`ai2human-b20-gateway`](https://github.com/ai2humannetwork/ai2human-b20-gateway) | B20 / Compliance | B20 token configuration, role and policy planning, proof-gated issuance flows, and Base Sepolia test evidence. |
+| **Protocol** | [`ai2human-protocol`](https://github.com/ai2humannetwork/ai2human-protocol) | Defines request manifests, proof bundles, verification results, settlement events, and task state machines. |
+| **Agent Access** | [`ai2human-skills`](https://github.com/ai2humannetwork/ai2human-skills) | Exposes AI2Human as agent-readable skills, manifests, task templates, and test paths. |
+| **Proof** | [`ai2human-proof-kit`](https://github.com/ai2humannetwork/ai2human-proof-kit) | Provides structured proof schemas, sample bundles, reviewer outputs, and validation utilities. |
+| **Settlement** | [`ai2human-settlement-contracts`](https://github.com/ai2humannetwork/ai2human-settlement-contracts) | Handles Base USDC prize pools, verified reward settlement, claims, refunds, and payout records. |
+| **B20 Gateway** | [`ai2human-b20-gateway`](https://github.com/ai2humannetwork/ai2human-b20-gateway) | Connects Base B20 token rules with AI2Human proof-gated eligibility, roles, policies, and issuance planning. |
 
-## What We Are Building
+## Architecture
 
-AI2Human is not a generic task marketplace.
+```mermaid
+flowchart LR
+  A["Agent / Project Request"] --> B["AI2Human Skills"]
+  B --> C["Protocol Router"]
+  C --> D["Human Execution or Verification"]
+  D --> E["Structured Proof Bundle"]
+  E --> F["Verification Engine"]
+  F --> G["Settlement Layer"]
+  G --> H["Reputation Graph"]
 
-It is a coordination layer for workflows where agents need humans to produce verifiable outcomes.
-
-### Agent Skills
-
-Agents should be able to create and monitor AI2Human workflows through skill files and APIs:
-
-- create campaign drafts
-- preview funding requirements
-- request human verification
-- read proof and public reports
-- monitor settlement status
-- hand off blocked steps to verified humans
-
-### Structured Proof
-
-Human work is only useful to agents if it becomes machine-readable evidence.
-
-AI2Human proof bundles can include:
-
-- URLs
-- screenshots
-- images
-- documents
-- wallet events
-- transaction references
-- reviewer decisions
-- timestamps and hashes
-
-### Verified Settlement
-
-Settlement is part of the workflow, not an off-platform promise.
-
-The settlement layer supports:
-
-- Base USDC reward pools
-- holder-gated reward campaigns
-- backend-verified claims
-- payout records
-- refund and reconciliation paths
-
-### B20 Proof Gateway
-
-B20 gives tokens programmable rules. AI2Human connects those rules to human verification.
-
-Example:
-
-```text
-Create a B20 token for a verified community.
-Only verified members can mint.
-Require AI2Human proof before role assignment.
+  C --> I["B20 / Compliance Gateway"]
+  I --> E
+  F --> J["Policy Decision"]
+  J --> I
 ```
 
-The gateway outputs:
+## What Is Live In The Open
 
-- token configuration
-- roles
-- policies
-- proof requirements
-- deployment checklist
-- optional human verification task template
+| Surface | Link | Status |
+| --- | --- | --- |
+| Network specs | [`ai2human-protocol`](https://github.com/ai2humannetwork/ai2human-protocol) | Public seed |
+| Agent skills | [`ai2human-skills`](https://github.com/ai2humannetwork/ai2human-skills) | Public seed |
+| Proof schemas | [`ai2human-proof-kit`](https://github.com/ai2humannetwork/ai2human-proof-kit) | Public seed with validator |
+| Settlement contracts | [`ai2human-settlement-contracts`](https://github.com/ai2humannetwork/ai2human-settlement-contracts) | Public seed with PrizePool code |
+| B20 gateway | [`ai2human-b20-gateway`](https://github.com/ai2humannetwork/ai2human-b20-gateway) | Public seed with Base Sepolia evidence |
+| Product app | [ai2human.work](https://ai2human.work) | Live product surface |
 
 ## Developer Entry Points
 
-Start here:
+**For agents**
 
-- Protocol specs: [`ai2human-protocol`](https://github.com/ai2humannetwork/ai2human-protocol)
-- Agent integration: [`ai2human-skills`](https://github.com/ai2humannetwork/ai2human-skills)
-- Proof validation: [`ai2human-proof-kit`](https://github.com/ai2humannetwork/ai2human-proof-kit)
-- Settlement contracts: [`ai2human-settlement-contracts`](https://github.com/ai2humannetwork/ai2human-settlement-contracts)
-- B20 proof flows: [`ai2human-b20-gateway`](https://github.com/ai2humannetwork/ai2human-b20-gateway)
+Start with [`ai2human-skills`](https://github.com/ai2humannetwork/ai2human-skills). It contains skill files, manifests, task templates, and OpenClaw-compatible test paths for creating and previewing AI2Human workflows.
 
-## Current Focus
+**For protocol builders**
+
+Start with [`ai2human-protocol`](https://github.com/ai2humannetwork/ai2human-protocol). It defines the canonical objects behind the network: requests, proof, verification, settlement, and reputation events.
+
+**For token issuers**
+
+Start with [`ai2human-b20-gateway`](https://github.com/ai2humannetwork/ai2human-b20-gateway). It shows how B20 token configuration, roles, policies, and human proof requirements can be planned together.
+
+**For reviewers and verification systems**
+
+Start with [`ai2human-proof-kit`](https://github.com/ai2humannetwork/ai2human-proof-kit). It contains the schemas and examples for turning human output into machine-readable evidence.
+
+## Why This Matters
+
+The agent economy will not be built by models alone.
+
+It needs:
+
+- execution networks
+- human verification
+- structured proof
+- policy-aware token flows
+- settlement rails
+- reputation that compounds from completed work
+
+AI2Human is building that layer.
+
+## Current Build Focus
 
 ```text
 Ship Agent Skills
 Ship B20 Skills
 Harden structured proof
 Expand Base settlement flows
-Build the human verification layer agents can call
+Make human verification callable by agents
 ```
 
 ## Public Surfaces
 
 - Website: [ai2human.work](https://ai2human.work)
 - X: [@ai2humannetwork](https://x.com/ai2humannetwork)
-
-## Thesis
-
-The next wave of agents will not only need better models.
-
-They will need execution networks, proof systems, human verification, policy-aware token flows, and settlement rails.
-
-AI2Human is building that layer.
 
