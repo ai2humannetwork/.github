@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://ai2human.work">
+  <a href="https://ai2human.io">
     <img alt="AI2Human Network" src="https://img.shields.io/badge/AI2Human-Network-67E8F9?style=for-the-badge&labelColor=05070F">
   </a>
   <a href="https://x.com/ai2humannetwork">
@@ -153,6 +153,6 @@ Make human verification callable by agents
 
 ## Public Surfaces
 
-- Website: [ai2human.work](https://ai2human.work)
+- Website: [ai2human.io](https://ai2human.io)
 - X: [@ai2humannetwork](https://x.com/ai2humannetwork)
 
